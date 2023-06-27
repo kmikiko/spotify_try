@@ -20,5 +20,14 @@
   <%= @blog.song %>
 </p>
 
+<% track = @tracks.find { |t| t[:blog] == @blog } %>
+        <% if track && track[:url] %>
+          <p><audio src="<%= track[:url] %>" controls></audio></p>
+          <p><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
+        <% else %>
+          <p>No preview available</p>
+          <p></p>
+        <% end %>
+
 <%= link_to 'Edit', edit_blog_path(@blog) %> |
 <%= link_to 'Back', blogs_path %>

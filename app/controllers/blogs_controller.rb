@@ -17,6 +17,7 @@ class BlogsController < ApplicationController
         tracks = RSpotify::Track.search("#{song} #{artist}")
         tracks.each do |track|
           url = track.preview_url
+          popularity = track.popularity
           @tracks << { blog: blog, url: url, track: track }
         end
       # rescue StandardError => e
@@ -29,6 +30,21 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1 or /blogs/1.json
   def show
+    @tracks = []
+    song = @blog.song
+    artist = @blog.artist
+      # begin
+        tracks = RSpotify::Track.search("#{song} #{artist}")
+        tracks.each do |track|
+          url = track.preview_url
+          popularity = track.popularity
+          @tracks << { blog: @blog, url: url, track: track }
+        end
+      # rescue StandardError => e
+      #   puts "Error occurred"
+      # end
+    
+
   end
 
   # GET /blogs/new
