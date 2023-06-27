@@ -41,6 +41,14 @@
 </table>
 
 <br>
+<% @rank_blogs.each do |t| %>
+  <p><%= "タイトル：#{t.title}" %></p>
+  <p><%= "コンテント：#{t.content}" %></p>
+  <p><%= "アーティスト：#{t.artist}" %></p>
+  <p><%= "曲：#{t.song}" %></p>
+  <p><%= "閲覧数：#{t.impressions_count}回" %></p>
+  <hr>
+<% end %>
 
 <%= link_to 'New Blog', new_blog_path %>
 
