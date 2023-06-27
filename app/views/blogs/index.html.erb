@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Blogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Artist</th>
+      <th>Song</th>
+      <th>Preview</th>
+      <th>Spotify</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td><%= blog.title %></td>
+        <td><%= blog.content %></td>
+        <td><%= blog.artist %></td>
+        <td><%= blog.song %></td>
+        
+        <% track = @tracks.find { |t| t[:blog] == blog } %>
+        <% if track && track[:url] %>
+          <td><audio src="<%= track[:url] %>" controls></audio></td>
+          <td><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></td>
+        <% else %>
+          <td><p>No preview available</p></td>
+          <td></td>
+        <% end %>
+        
+        <td><%= link_to 'Show', blog %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Blog', new_blog_path %>
+
+
+
+
+
+
+
+
