@@ -3,6 +3,7 @@ class BlogsController < ApplicationController
   RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_ID'])
 
   before_action :set_blog, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   # GET /blogs or /blogs.json
   def index
