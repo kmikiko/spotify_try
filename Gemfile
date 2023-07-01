@@ -15,11 +15,12 @@ gem 'dotenv-rails'
 gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
-gem 'impressionist'
+gem 'impressionist' #閲覧回数
 gem 'devise'
 gem 'rexml'
 gem 'devise-i18n'
-
+gem 'rails_admin', '~> 3.0'
+gem 'cancancan'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
