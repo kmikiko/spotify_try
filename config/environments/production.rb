@@ -63,7 +63,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "spotify_try_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'hogehoge-fugafuga.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'radiant-mountain-89034-460662489778.herokuapp.com' }
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     user_name: ENV['SENDGRID_USERNAME'],
