@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  #  :lockable, :timeoutable, :trackable and 
-  devise :database_authenticatable, :registerable, :timeoutable,
+
+  devise :database_authenticatable, :registerable, :timeoutable, :lockable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable ,:omniauthable, omniauth_providers: %i(google)
   
   def self.create_unique_string
@@ -22,5 +22,6 @@ class User < ApplicationRecord
     user
   end
 
-  
+  has_one :user_profile, dependent: :destroy, inverse_of: :user
+  accepts_nested_attributes_for :user_profile
 end
