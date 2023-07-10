@@ -1,6 +1,9 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Blogs</h1>
+<% if current_user.try(:admin?) %>
+  <h1>fav-lyri 管理者画面</h1>
+<% else %>
+  <h1>fav-lyri</h1>
+<% end %>
 
 <table>
   <thead>
@@ -41,6 +44,18 @@
 </table>
 
 <br>
+
+<% n = 1 %>
+<% @rank_blogs.each do |t| %>
+  <p><%= "第#{n}位"%></p>
+  <p><%= "タイトル：#{t.title}" %></p>
+  <p><%= "コンテント：#{t.content}" %></p>
+  <p><%= "アーティスト：#{t.artist}" %></p>
+  <p><%= "曲：#{t.song}" %></p>
+  <p><%= "閲覧数：#{t.impressions_count}回" %></p>
+  <% n += 1 %>
+  <hr>
+<% end %>
 
 <%= link_to 'New Blog', new_blog_path %>
 

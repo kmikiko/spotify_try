@@ -8,9 +8,36 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
 
   <body>
+    <div id="app">
+      <p v-if="text">入力値は {{ text }} です</p>
+      <input v-model="text">
+    </div>
+    <% if user_signed_in? %>
+      <ul><%= link_to "ブログ投稿", blogs_path %></ul>
+      <ul><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></ul>
+    <% else %>
+      <ul><%= link_to 'ログイン', new_user_session_path %></ul>
+      <ul><%= link_to 'サインアップ', new_user_registration_path %></ul>
+      <ul><%= link_to 'Googleでサインアップ', user_google_omniauth_authorize_path, method: :post %></ul>
+    <% end %>
+    <% if notice %>
+      <p class="alert alert-notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-error"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
+  <script>
+    let app =  new Vue({
+      el: "#app",
+      data: {
+        text: ''
+      }
+    })
+  </script>
 </html>

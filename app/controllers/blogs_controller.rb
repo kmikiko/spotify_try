@@ -3,10 +3,12 @@ class BlogsController < ApplicationController
   RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_ID'])
 
   before_action :set_blog, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
 
   # GET /blogs or /blogs.json
   def index
     @blogs = Blog.all
+    @rank_blogs = Blog.order(impressions_count: 'DESC').limit(5)   # ランキング
     @tracks = []
     
     @blogs.each do |blog|
@@ -29,6 +31,22 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1 or /blogs/1.json
   def show
+    impressionist(@blog, nil, unique: [:ip_address])  # 閲覧数
+
+    @tracks = []
+    song = @blog.song
+    artist = @blog.artist
+      # begin
+        tracks = RSpotify::Track.search("#{song} #{artist}")
+        tracks.each do |track|
+          url = track.preview_url
+          @tracks << { blog: @blog, url: url, track: track }
+        end
+      # rescue StandardError => e
+      #   puts "Error occurred"
+      # end
+    
+
   end
 
   # GET /blogs/new

@@ -12,6 +12,20 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rspotify'
 gem 'dotenv-rails'
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
+gem 'impressionist' #閲覧回数
+gem 'devise'
+gem 'rexml'
+gem 'devise-i18n'
+gem 'rails_admin', '~> 3.0'
+gem 'cancancan'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'carrierwave', '~> 3.0'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -27,6 +41,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'letter_opener_web'
 end
 
 group :test do
